@@ -71,9 +71,10 @@ def download_science(startPage, endPage):
 				# Download the Transcript and save to ./60_second_science/Transcript
 				print('Downloading transcript of %s...' % title)
 				with open(os.path.join('Transcript', title + '.txt'), 'wb') as transcript_file:
-					transcript = soup.select('div[class=transcript__inner]')[:-2]
+					transcript = soup.select('div[class=transcript__inner] p')[:-2]
 					for paragraph in transcript:
-						transcript_file.write(paragraph.encode('utf-8'))
+						transcript_file.write((paragraph.getText() + '\n').encode('utf-8'))
+		time.sleep(2)
 	print('Done.')
 
 if __name__ == '__main__':
